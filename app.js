@@ -1,4 +1,5 @@
 //jshint esversion:6
+require("dotenv").config();
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -20,7 +21,10 @@ app.use(express.static("public"));
 // connect to local database with mongoose and use/create an database named postsDB
 //mongoose.connect("mongodb://localhost:27017/blogDB",{useNewUrlParser: true , useUnifiedTopology: true});
 //connect to atlas
-mongoose.connect("mongodb+srv://admin-oren:admin-oren@blogposts.reebj.mongodb.net/BLOGWITHDATABASE",{
+
+const mongoDbUrl = "mongodb+srv://"+process.env.DB_USER + ":" + process.env.DB_PWD + "@blogposts.reebj.mongodb.net/BLOGWITHDATABASE";
+
+mongoose.connect(mongoDbUrl,{
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
